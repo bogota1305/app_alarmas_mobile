@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/mobile/conectar_google.dart';
 import 'package:myapp/mobile/create_edit_alarm_screen.dart';
 import 'package:myapp/mobile/descargar_app_reloj.dart';
 import 'package:myapp/utils.dart';
@@ -17,7 +18,6 @@ class HomeAlarms extends StatefulWidget {
 }
 
 class _HomeAlarmsState extends State<HomeAlarms> {
-
   @override
   Widget build(BuildContext context) {
     bool alarm1 = widget.alarm1;
@@ -37,11 +37,11 @@ class _HomeAlarmsState extends State<HomeAlarms> {
             Spacer(),
             InkWell(
               onTap: () {
-                // Navigator.of(context).pushReplacement(
-                //   MaterialPageRoute(
-                //     builder: (context) => DownloadAppWatch(),
-                //   ),
-                // );
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => DownloadAppWatch(),
+                  ),
+                );
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -63,7 +63,13 @@ class _HomeAlarmsState extends State<HomeAlarms> {
             ),
             SizedBox(width: 10.0),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => ConnectGoogleScreen(),
+                  ),
+                );
+              },
               child: Container(
                 width: 36,
                 height: 36,
@@ -138,9 +144,9 @@ class _HomeAlarmsState extends State<HomeAlarms> {
               AlarmCard(
                 backgroundColor: Color.fromRGBO(70, 145, 153, 1),
                 textColor: Colors.white,
-                isExit: true, 
-                alarmName: 'Alarma 1', 
-                alarmTime: '8:25 a.m.', 
+                isExit: true,
+                alarmName: 'Alarma 1',
+                alarmTime: '8:25 a.m.',
                 visible: alarm1,
               ),
               SizedBox(height: 20.0),
@@ -148,7 +154,7 @@ class _HomeAlarmsState extends State<HomeAlarms> {
                 backgroundColor: Color.fromRGBO(217, 217, 217, 1),
                 textColor: Color.fromRGBO(4, 23, 30, 1),
                 isExit: false,
-                alarmName: 'Alarma 2', 
+                alarmName: 'Alarma 2',
                 alarmTime: '9:10 a.m.',
                 visible: alarm2,
               ),
@@ -172,9 +178,10 @@ class AlarmCard extends StatelessWidget {
     super.key,
     required this.backgroundColor,
     required this.textColor,
-    required this.isExit, 
-    required this.alarmName, 
-    required this.alarmTime, required this.visible,
+    required this.isExit,
+    required this.alarmName,
+    required this.alarmTime,
+    required this.visible,
   });
 
   @override
@@ -203,7 +210,11 @@ class AlarmCard extends StatelessWidget {
                     ),
                   ),
                   Spacer(),
-                  Switch(value: false, onChanged: ((value) {})),
+                  Switch(
+                    value: true,
+                    onChanged: (value) {},
+                    activeColor: Color.fromRGBO(4, 23, 30, 1),
+                  )
                 ],
               ),
               SizedBox(height: 20.0),
@@ -376,7 +387,8 @@ class AlarmCard extends StatelessWidget {
               Container(
                 color: Color.fromRGBO(4, 23, 30, 1),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 65.0, vertical: 20.0),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 65.0, vertical: 20.0),
                   child: Text(
                     alarmTime,
                     textAlign: TextAlign.center,
@@ -395,15 +407,20 @@ class AlarmCard extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25.0),
-                      color: isExit ? Color.fromRGBO(217, 217, 217, 1) : Color.fromRGBO(70, 145, 153, 1),
+                      color: isExit
+                          ? Color.fromRGBO(217, 217, 217, 1)
+                          : Color.fromRGBO(70, 145, 153, 1),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 30.0, vertical: 10.0),
                       child: Row(
                         children: [
                           Icon(
                             Icons.edit,
-                            color:  isExit ? Color.fromRGBO(4, 23, 30, 1) : Colors.white,
+                            color: isExit
+                                ? Color.fromRGBO(4, 23, 30, 1)
+                                : Colors.white,
                             size: 18.0,
                           ),
                           Text(
@@ -413,7 +430,9 @@ class AlarmCard extends StatelessWidget {
                               'Roboto',
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color:  isExit ? Color.fromRGBO(4, 23, 30, 1) : Colors.white,
+                              color: isExit
+                                  ? Color.fromRGBO(4, 23, 30, 1)
+                                  : Colors.white,
                             ),
                           ),
                         ],
@@ -425,7 +444,10 @@ class AlarmCard extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => HomeAlarms(alarm1: false, alarm2: false,),
+                          builder: (context) => HomeAlarms(
+                            alarm1: false,
+                            alarm2: false,
+                          ),
                         ),
                       );
                     },
@@ -435,7 +457,8 @@ class AlarmCard extends StatelessWidget {
                         color: Color.fromRGBO(4, 23, 30, 1),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 30.0, vertical: 10.0),
                         child: Row(
                           children: [
                             Icon(
